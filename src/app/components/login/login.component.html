@@ -1,0 +1,55 @@
+<div class="login-wrapper">
+  <form class="login" (ngSubmit)="login()" (reset)="resetForm()" #form="ngForm">
+
+    <!-- Title -->
+    <section class="title">
+      <h3 class="welcome">Welcome to your</h3>
+      Dinner Diary
+      <h5 class="hint">Use your credentials to sign in</h5>
+    </section>
+
+    <div class="login-group">
+
+      <!-- Input: emailAddress -->
+      <clr-input-container>
+        <input type="text" name="emailAddress" clrInput placeholder="Email Address" [(ngModel)]="emailAddress" required email #emailInput/>
+        <clr-control-error *clrIfError="'required'">You must enter the email address you signed up with</clr-control-error>
+        <clr-control-error *clrIfError="'email'">Your email address is invalid</clr-control-error>
+      </clr-input-container>
+
+      <!-- Input: password -->
+      <clr-password-container>
+        <input type="password" name="password" clrPassword placeholder="Password" [(ngModel)]="password" required #passwordInput/>
+        <clr-control-error *clrIfError="'required'">You must enter your password</clr-control-error>
+      </clr-password-container>
+
+      <!-- Input: rememberMe -->
+      <!--
+      <clr-checkbox-wrapper>
+        <label>Remember me</label>
+        <input type="checkbox" name="rememberMe" clrCheckbox [(ngModel)]="rememberMe"/>
+      </clr-checkbox-wrapper>
+      -->
+
+      <!-- Alert: invalid credentials -->
+      <div class="alert alert-danger" role="alert" *ngIf="isInvalidCredentials">
+        <div class="alert-items">
+          <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+              <clr-icon class="alert-icon" shape="danger-circle"></clr-icon>
+            </div>
+            <span class="alert-text">Invalid email address or password</span>
+          </div>
+        </div>
+        <button type="reset" class="close">
+          <clr-icon shape="eraser"></clr-icon>
+        </button>
+      </div>
+
+      <!-- Buttons / Links -->
+      <button type="submit" class="btn btn-primary" [disabled]="form.invalid">SIGN IN</button>
+      <a routerLink="/register" class="signup">New? Click here to sign up!</a>
+      <a routerLink="/reset" class="signup">Forgot your password? (NYI)</a>
+    </div>
+  </form>
+</div>

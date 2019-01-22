@@ -1,0 +1,77 @@
+<div class="login-wrapper">
+  <form class="login" (ngSubmit)="register()" #form="ngForm">
+
+    <!-- Title -->
+    <section class="title">
+      <h3 class="welcome">Welcome to your</h3>
+      Dinner Diary
+      <h5 class="hint">Sign up by providing your information below</h5>
+    </section>
+
+    <div class="login-group">
+
+      <!-- Input: emailAddress -->
+      <clr-input-container>
+        <input type="email" name="emailAddress" clrInput placeholder="Email Address *"
+               [(ngModel)]="account.emailAddress" required email (keyup)="hideAlert()"/>
+        <clr-control-error *clrIfError="'required'">You must enter a valid email address</clr-control-error>
+        <clr-control-error *clrIfError="'email'">Your email address is invalid</clr-control-error>
+      </clr-input-container>
+
+      <!-- Input: username -->
+      <clr-input-container>
+        <input type="text" name="username" clrInput placeholder="Username" [(ngModel)]="account.username"/>
+        <clr-control-helper>
+          This is what we'll call you. <br/>
+          If you leave this field empty, it defaults to your email address.
+        </clr-control-helper>
+      </clr-input-container>
+
+      <!-- Input: password -->
+      <clr-password-container>
+        <input type="password" name="password" clrPassword placeholder="Password *" [(ngModel)]="account.password" required minlength="8"/>
+        <clr-control-error *clrIfError="'required'">You must enter a password</clr-control-error>
+        <clr-control-error *clrIfError="'minlength'">Your password must contain at least 8 characters</clr-control-error>
+      </clr-password-container>
+
+      <!-- Input: confirmPassword -->
+      <clr-password-container>
+        <input type="password" name="confirmPassword" clrPassword placeholder="Confirm Password *" [(ngModel)]="confirmPassword"
+               required matchPassword [password]="account.password"/>
+        <clr-control-error *clrIfError="'required'">You must confirm your password</clr-control-error>
+        <clr-control-error *clrIfError="'matchPassword'">The password confirmation must match your password</clr-control-error>
+      </clr-password-container>
+
+      <!-- Alert: successfully registered -->
+      <div class="alert alert-success" role="alert" *ngIf="isSuccessfullyRegistered">
+        <div class="alert-items">
+          <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+              <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+            </div>
+            <span class="alert-text">Successfully signed up</span>
+          </div>
+        </div>
+        <button type="button" (click)="navigateToLogin()" class="close">
+          <clr-icon shape="login"></clr-icon>
+        </button>
+      </div>
+
+      <!-- Alert: email in use -->
+      <div class="alert alert-danger" role="alert" *ngIf="isEmailAddressAlreadyInUse">
+        <div class="alert-items">
+          <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+              <clr-icon class="alert-icon" shape="danger-circle"></clr-icon>
+            </div>
+            <span class="alert-text">{{account.emailAddress}} is already in use</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Buttons / Links -->
+      <button type="submit" class="btn btn-primary" [disabled]="form.invalid || isSuccessfullyRegistered">SIGN UP</button>
+      <a routerLink="/login" class="signup">Already signed up? Click here to sign in!</a>
+    </div>
+  </form>
+</div>
