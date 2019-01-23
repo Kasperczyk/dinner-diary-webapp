@@ -13,26 +13,37 @@ import '@clr/icons/shapes/text-edit-shapes';
 import '@clr/icons/shapes/technology-shapes';
 import {Account} from './models/account';
 import {AccountService} from './services/account.service';
+import {Router} from '@angular/router';
+import {User} from './models/user';
 
 @Component({
   selector: 'dd-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   account = <Account>{};
 
   constructor(private authenticationService: AuthenticationService,
-              private accountService: AccountService) {
+              private accountService: AccountService,
+              private router: Router) {
     ClarityIcons.add({'dd-logo': 'todo'}); // todo add logo
   }
 
-  userIsLoggedIn() {
-    return this.authenticationService.isLoggedIn();
+  ngOnInit(): void {
+    if (this.authenticationService.isUserLoggedIn()) {
+      const id = (JSON.parse(localStorage.getItem('currentUser')) as User).id;
+      this.getAccount(id);
+    } else {
+      this.authenticationService.successfulLoginEmitted
+        .subscribe(id => {
+          this.getAccount(id);
+        });
+    }
   }
 
-  logout() {
-    this.authenticationService.logout();
+  isActive(url: string) {
+    return this.router.url === `/${url}`;
   }
 
   getAccount(id: number) {
@@ -42,10 +53,11 @@ export class AppComponent implements OnInit{
       });
   }
 
-  ngOnInit(): void {
-    this.authenticationService.successfulLoginEmitted
-      .subscribe(id => {
-        this.getAccount(id);
-      });
+  userIsLoggedIn() {
+    return this.authenticationService.isUserLoggedIn();
+  }
+
+  logout() {
+    this.authenticationService.logout();
   }
 }

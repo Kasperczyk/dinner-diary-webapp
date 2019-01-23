@@ -1,7 +1,7 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {AuthenticationService} from '../../services/authentication.service';
+import {AuthenticationService} from '../../../services/authentication.service';
 import {Router} from '@angular/router';
-import {User} from '../../models/user';
+import {User} from '../../../models/user';
 
 @Component({
   selector: 'dd-login',
@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
         const token = response.headers.get('Authorization').split('Bearer ')[1];
         const user: User = {emailAddress: this.emailAddress, id: response.body, token: token};
         localStorage.setItem('currentUser', JSON.stringify(user));
-        this.router.navigateByUrl('/dashboard');
+        this.router.navigateByUrl('/menus');
         this.isInvalidCredentials = false;
       }, () => {
         this.isInvalidCredentials = true;

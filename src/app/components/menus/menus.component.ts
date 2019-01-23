@@ -3,11 +3,11 @@ import {AuthenticationService} from '../../services/authentication.service';
 import {User} from '../../models/user';
 
 @Component({
-  selector: 'dd-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  selector: 'dd-menus',
+  templateUrl: './menus.component.html',
+  styleUrls: ['./menus.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class MenusComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService) { }
 
@@ -15,5 +15,4 @@ export class DashboardComponent implements OnInit {
     const id = (JSON.parse(localStorage.getItem('currentUser')) as User).id;
     this.authenticationService.emitSuccessfulLoginEvent(id);
   }
-
 }

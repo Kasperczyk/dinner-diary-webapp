@@ -1,8 +1,12 @@
 <clr-main-container>
 
-  <div class="alert alert-app-level" *ngIf="false">
-    Todo
-  </div>
+  <clr-alert [clrAlertAppLevel]="true" [clrAlertType]="'danger'" *ngIf="false">
+    <clr-alert-item>
+      <span class="alert-text">
+        Test alert
+      </span>
+    </clr-alert-item>
+  </clr-alert>
 
   <!-- Header -->
   <clr-header class="header-4" *ngIf="userIsLoggedIn()">
@@ -17,8 +21,8 @@
 
     <!-- Header navigation -->
     <div class="header-nav" [clr-nav-level]="1">
-      <a routerLink="/dashboard" class="nav-link nav-text active">Dashboard</a>
-      <a routerLink="/dashboard" class="nav-link nav-text">Recipes</a>
+      <a routerLink="/menus" class="nav-link nav-text" [class.active]="isActive('menus')">Menus</a>
+      <a routerLink="/recipes" class="nav-link nav-text" [class.active]="isActive('recipes')">Recipes</a>
     </div>
 
     <!-- Header actions -->
@@ -32,21 +36,21 @@
         </button>
         <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
           <a routerLink="/account" clrDropdownItem>Account</a>
-          <a routerLink="/messages" clrDropdownItem>Messages</a>
           <a routerLink="/stats" clrDropdownItem>Stats</a>
+          <a routerLink="/messages" clrDropdownItem>Messages</a>
         </clr-dropdown-menu>
       </clr-dropdown>
 
-      <!-- Settings -->
+      <!-- Info -->
       <clr-dropdown>
         <button class="nav-icon" clrDropdownTrigger>
-          <clr-icon shape="cog"></clr-icon>
+          <clr-icon shape="help-info"></clr-icon>
           <clr-icon shape="caret down"></clr-icon>
         </button>
         <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
-          <a routerLink="/settings" clrDropdownItem>Settings</a>
-          <a routerLink="/help" clrDropdownItem>Help</a>
           <a routerLink="/about" clrDropdownItem>About</a>
+          <a routerLink="/help" clrDropdownItem>Help</a>
+          <a routerLink="/imprint" clrDropdownItem>Imprint</a>
         </clr-dropdown-menu>
       </clr-dropdown>
 
@@ -58,9 +62,11 @@
   </clr-header>
 
   <!-- Sub navigation -->
+  <!--
   <nav class="subnav" *ngIf="userIsLoggedIn()">
 
   </nav>
+  -->
 
   <!-- Content area -->
   <div class="content-container">
@@ -69,8 +75,10 @@
     </main>
 
     <!-- Side navigation -->
+    <!--
     <nav class="sidenav" *ngIf="userIsLoggedIn()">
 
     </nav>
+    -->
   </div>
 </clr-main-container>

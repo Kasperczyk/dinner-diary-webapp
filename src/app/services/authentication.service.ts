@@ -33,7 +33,7 @@ export class AuthenticationService {
     this.router.navigateByUrl('/login');
   }
 
-  isLoggedIn() {
+  isUserLoggedIn() {
     return localStorage.getItem('currentUser') != null ;
   }
 
