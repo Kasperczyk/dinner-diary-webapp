@@ -14,7 +14,6 @@ import '@clr/icons/shapes/technology-shapes';
 import {Account} from './models/account';
 import {AccountService} from './services/account.service';
 import {Router} from '@angular/router';
-import {User} from './models/user';
 
 @Component({
   selector: 'dd-root',
@@ -31,11 +30,11 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log('app component init');
     if (this.authenticationService.isUserLoggedIn()) {
-      const id = (JSON.parse(localStorage.getItem('currentUser')) as User).id;
-      this.getAccount(id);
+      this.getAccount(this.authenticationService.currentUser.id);
     } else {
-      this.authenticationService.successfulLoginEmitted
+      this.authenticationService.loadAccountEmitted
         .subscribe(id => {
           this.getAccount(id);
         });
@@ -48,8 +47,8 @@ export class AppComponent implements OnInit {
 
   getAccount(id: number) {
     this.accountService.getAccount(id)
-      .subscribe(value => {
-        this.account = value;
+      .subscribe(account => {
+        this.account = account;
       });
   }
 

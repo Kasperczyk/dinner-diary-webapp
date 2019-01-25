@@ -1,0 +1,69 @@
+<form clrForm #form="ngForm">
+  <div class="card">
+    <div class="card-header">
+      Account Settings
+    </div>
+    <div class="card-block">
+
+      <!-- Alert: successful change -->
+      <div class="alert alert-success alert-sm" *ngIf="showSuccessAlert">
+        <button type="button" class="close" aria-label="Close" (click)="hideAlerts()">
+          <clr-icon aria-hidden="true" shape="close"></clr-icon>
+        </button>
+        <div class="alert-items">
+          <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+              <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+            </div>
+            <span class="alert-text">Account successfully updated</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Alert: email in use -->
+      <div class="alert alert-danger alert-sm" *ngIf="isEmailAddressAlreadyInUse">
+        <button type="button" class="close" aria-label="Close" (click)="hideAlerts()">
+          <clr-icon aria-hidden="true" shape="close"></clr-icon>
+        </button>
+        <div class="alert-items">
+          <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+              <clr-icon class="alert-icon" shape="danger-circle"></clr-icon>
+            </div>
+            <span class="alert-text">{{emailAddress}} is already in use</span>
+          </div>
+        </div>
+      </div>
+
+      <br/>
+      <div class="card-title">
+        Change your info
+      </div>
+
+      <!-- Input: username -->
+      <clr-input-container>
+        <label>Username</label>
+        <input type="text" name="username" clrInput [(ngModel)]="username" class="wide-input" required (keyup)="hideAlerts()"/>
+        <clr-control-error *clrIfError="'required'">You must enter a username</clr-control-error>
+      </clr-input-container>
+
+      <!-- Input: email address -->
+      <clr-input-container>
+        <label>Email Address</label>
+        <input type="text" name="emailAddress" clrInput [(ngModel)]="emailAddress" class="wide-input" required email (keyup)="hideAlerts()"/>
+        <clr-control-error *clrIfError="'required'">You must enter a valid email address</clr-control-error>
+        <clr-control-error *clrIfError="'email'">Your email address is invalid</clr-control-error>
+      </clr-input-container>
+      <br/>
+    </div>
+
+    <!-- Buttons -->
+    <div class="card-footer">
+      <button class="btn btn-primary" (click)="patchUsernameAndEmailAddress()"
+              [disabled]="form.invalid || username == account.username && emailAddress == account.emailAddress">
+        SAVE
+      </button>
+      <button class="btn btn-outline" (click)="resetUsernameAndEmailAddress()">CANCEL</button>
+    </div>
+  </div>
+</form>

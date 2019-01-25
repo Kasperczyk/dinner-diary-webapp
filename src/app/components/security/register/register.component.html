@@ -43,7 +43,7 @@
       </clr-password-container>
 
       <!-- Alert: successfully registered -->
-      <div class="alert alert-success" role="alert" *ngIf="isSuccessfullyRegistered">
+      <div class="alert alert-success" *ngIf="isSuccessfullyRegistered">
         <div class="alert-items">
           <div class="alert-item static">
             <div class="alert-icon-wrapper">
@@ -58,7 +58,7 @@
       </div>
 
       <!-- Alert: email in use -->
-      <div class="alert alert-danger" role="alert" *ngIf="isEmailAddressAlreadyInUse">
+      <div class="alert alert-danger" *ngIf="isEmailAddressAlreadyInUse">
         <div class="alert-items">
           <div class="alert-item static">
             <div class="alert-icon-wrapper">

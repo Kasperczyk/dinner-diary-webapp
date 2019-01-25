@@ -3,7 +3,7 @@ import {LoginComponent} from './components/security/login/login.component';
 import {RegisterComponent} from './components/security/register/register.component';
 import {MenusComponent} from './components/menus/menus.component';
 import {AuthGuard} from './security/auth.guard';
-import {AccountComponent} from './components/account/account/account.component';
+import {AccountComponent} from './components/account/account/account/account.component';
 import {StatsComponent} from './components/account/stats/stats.component';
 import {MessagesComponent} from './components/account/messages/messages.component';
 import {RecipesComponent} from './components/recipes/recipes.component';

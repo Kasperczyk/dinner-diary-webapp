@@ -17,6 +17,9 @@ export class ErrorInterceptor implements HttpInterceptor {
           this.authenticationService.logout();
           location.reload(true);
         }
+        if (error.status === 403) { // forbidden
+          this.authenticationService.logout();
+        }
         const apiError = error.error as ApiError;
         console.log(apiError.verboseErrorMessage);
         return throwError(apiError);

@@ -4,11 +4,16 @@ import {Account} from '../models/account';
 import {restUrl} from '../config';
 import {Router} from '@angular/router';
 import {Subject} from 'rxjs';
+import {User} from '../models/user';
 
 @Injectable({providedIn: 'root'})
 export class AuthenticationService {
-  private emitSuccessfulLogin = new Subject<any>();
-  successfulLoginEmitted = this.emitSuccessfulLogin.asObservable();
+  private emitLoadAccount = new Subject<any>();
+  loadAccountEmitted = this.emitLoadAccount.asObservable();
+
+  get currentUser(): User {
+    return (JSON.parse(localStorage.getItem('currentUser')) as User);
+  }
 
   constructor(private http: HttpClient,
               private router: Router) { }
@@ -37,7 +42,7 @@ export class AuthenticationService {
     return localStorage.getItem('currentUser') != null ;
   }
 
-  emitSuccessfulLoginEvent(id: number) {
-    this.emitSuccessfulLogin.next(id);
+  emitLoadAccountEvent() {
+    this.emitLoadAccount.next(this.currentUser.id);
   }
 }

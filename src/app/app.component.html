@@ -9,7 +9,7 @@
   </clr-alert>
 
   <!-- Header -->
-  <clr-header class="header-4" *ngIf="userIsLoggedIn()">
+  <clr-header class="header-1" *ngIf="userIsLoggedIn()">
 
     <!-- Branding -->
     <div class="branding">
@@ -35,7 +35,7 @@
           <clr-icon shape="caret down"></clr-icon>
         </button>
         <clr-dropdown-menu *clrIfOpen clrPosition="bottom-right">
-          <a routerLink="/account" clrDropdownItem>Account</a>
+          <a routerLink="/account" clrDropdownItem>Account Settings</a>
           <a routerLink="/stats" clrDropdownItem>Stats</a>
           <a routerLink="/messages" clrDropdownItem>Messages</a>
         </clr-dropdown-menu>

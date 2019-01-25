@@ -14,13 +14,16 @@ import {AuthInterceptor} from './security/auth-interceptor.service';
 import {ErrorInterceptor} from './error/error.interceptor';
 import {MenusComponent} from './components/menus/menus.component';
 import {MatchPasswordDirective} from './validators/match-password.directive';
-import {AccountComponent} from './components/account/account/account.component';
+import {AccountComponent} from './components/account/account/account/account.component';
 import {StatsComponent} from './components/account/stats/stats.component';
 import {MessagesComponent} from './components/account/messages/messages.component';
 import {RecipesComponent} from './components/recipes/recipes.component';
 import {AboutComponent} from './components/info/about/about.component';
 import {HelpComponent} from './components/info/help/help.component';
 import {ImprintComponent} from './components/info/imprint/imprint.component';
+import {AccountSettingsComponent} from './components/account/account/account-settings/account-settings.component';
+import {PasswordSettingsComponent} from './components/account/account/password-settings/password-settings.component';
+import {DeleteAccountComponent} from './components/account/account/delete-account/delete-account.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +39,10 @@ import {ImprintComponent} from './components/info/imprint/imprint.component';
     RecipesComponent,
     AboutComponent,
     HelpComponent,
-    ImprintComponent
+    ImprintComponent,
+    AccountSettingsComponent,
+    PasswordSettingsComponent,
+    DeleteAccountComponent
   ],
   imports: [
     BrowserModule,
