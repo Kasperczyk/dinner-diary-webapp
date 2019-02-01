@@ -23,10 +23,18 @@
     <div class="header-nav" [clr-nav-level]="1">
       <a routerLink="/menus" class="nav-link nav-text" [class.active]="isActive('menus')">Menus</a>
       <a routerLink="/recipes" class="nav-link nav-text" [class.active]="isActive('recipes')">Recipes</a>
+      <a routerLink="/cookbooks" class="nav-link nav-text" [class.active]="isActive('cookbooks')">Cookbooks</a>
+      <a routerLink="/contacts" class="nav-link nav-text" [class.active]="isActive('contacts')">Contacts</a>
     </div>
 
     <!-- Header actions -->
     <div class="header-actions">
+
+      <!-- Icon & Badge: new messages -->
+      <a routerLink="/messages" class="nav-link nav-icon" *ngIf="numberOfMessages > 0">
+        <clr-icon shape="envelope"></clr-icon>
+        <span class="badge badge-info">3</span>
+      </a>
 
       <!-- User -->
       <clr-dropdown>
@@ -51,8 +59,18 @@
           <a routerLink="/about" clrDropdownItem>About</a>
           <a routerLink="/help" clrDropdownItem>Help</a>
           <a routerLink="/imprint" clrDropdownItem>Imprint</a>
+          <a routerLink="/donate" clrDropdownItem>Donate</a>
         </clr-dropdown-menu>
       </clr-dropdown>
+
+      <clr-tooltip>
+        <a routerLink="/ticket" class="nav-link nav-icon" clrTooltipTrigger>
+          <clr-icon shape="bug"></clr-icon>
+        </a>
+        <clr-tooltip-content clrPosition="bottom-left" clrSize="xs">
+          <span>Tickets</span>
+        </clr-tooltip-content>
+      </clr-tooltip>
 
       <a href="#" class="nav-link nav-icon" (click)="logout()">
         <clr-icon shape="logout"></clr-icon>
@@ -71,7 +89,13 @@
   <!-- Content area -->
   <div class="content-container">
     <main class="content-area">
-      <router-outlet></router-outlet>
+      <div class="clr-row">
+        <div class="clr-col-12 clr-col-lg-2"></div>
+        <div class="clr-col-lg-8">
+          <router-outlet></router-outlet>
+        </div>
+        <div class="clr-col-12 clr-col-lg-2"></div>
+      </div>
     </main>
 
     <!-- Side navigation -->

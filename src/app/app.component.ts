@@ -22,6 +22,7 @@ import {Router} from '@angular/router';
 })
 export class AppComponent implements OnInit {
   account = <Account>{};
+  numberOfMessages = 3; // todo
 
   constructor(private authenticationService: AuthenticationService,
               private accountService: AccountService,
@@ -30,7 +31,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('app component init');
     if (this.authenticationService.isUserLoggedIn()) {
       this.getAccount(this.authenticationService.currentUser.id);
     } else {

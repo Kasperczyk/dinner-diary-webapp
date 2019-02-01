@@ -12,7 +12,7 @@ import {RegisterComponent} from './components/security/register/register.compone
 import {PasswordResetComponent} from './components/security/password-reset/password-reset.component';
 import {AuthInterceptor} from './security/auth-interceptor.service';
 import {ErrorInterceptor} from './error/error.interceptor';
-import {MenusComponent} from './components/menus/menus.component';
+import {MenuOverviewComponent} from './components/menus/menu-overview/menu-overview.component';
 import {MatchPasswordDirective} from './validators/match-password.directive';
 import {AccountComponent} from './components/account/account/account/account.component';
 import {StatsComponent} from './components/account/stats/stats.component';
@@ -24,6 +24,10 @@ import {ImprintComponent} from './components/info/imprint/imprint.component';
 import {AccountSettingsComponent} from './components/account/account/account-settings/account-settings.component';
 import {PasswordSettingsComponent} from './components/account/account/password-settings/password-settings.component';
 import {DeleteAccountComponent} from './components/account/account/delete-account/delete-account.component';
+import {CookbooksComponent} from './components/cookbooks/cookbooks.component';
+import {DonateComponent} from './components/info/donate/donate.component';
+import {TicketComponent} from './components/ticket/ticket.component';
+import {ContactsComponent} from './components/contacts/contacts.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +35,7 @@ import {DeleteAccountComponent} from './components/account/account/delete-accoun
     LoginComponent,
     RegisterComponent,
     PasswordResetComponent,
-    MenusComponent,
+    MenuOverviewComponent,
     MatchPasswordDirective,
     AccountComponent,
     StatsComponent,
@@ -42,7 +46,11 @@ import {DeleteAccountComponent} from './components/account/account/delete-accoun
     ImprintComponent,
     AccountSettingsComponent,
     PasswordSettingsComponent,
-    DeleteAccountComponent
+    DeleteAccountComponent,
+    CookbooksComponent,
+    DonateComponent,
+    TicketComponent,
+    ContactsComponent
   ],
   imports: [
     BrowserModule,

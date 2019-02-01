@@ -1,0 +1,157 @@
+<div class="card">
+  <div class="card-header">
+    Your Menus
+  </div>
+  <div class="card-block" *ngIf="menus.length == 0">
+    <br/>
+    <div class="card-text">
+      You haven't added any menus yet
+    </div>
+    <br/>
+  </div>
+  <div class="card-footer">
+    <button class="btn btn-primary" (click)="isNewMenuWizardOpen = true">ADD MENU</button>
+  </div>
+</div>
+
+<!-- Wizard: new menu -->
+<clr-wizard [(clrWizardOpen)]="isNewMenuWizardOpen" clrWizardSize="lg" #wizard>
+  <clr-wizard-title>Create a new menu</clr-wizard-title>
+
+   <!-- 1st page: date and description -->
+  <clr-wizard-page [clrWizardPageNextDisabled]="menu.cookedOn == null">
+  <ng-template clrPageTitle>Date & Description</ng-template>
+  <form class="form">
+  <section class="form-block">
+
+  <!-- Datepicker: cooked on -->
+  <div class="form-group row"> <!-- todo workaround: datepicker does not work correctly in forms within modals and wizards -->
+  <div class="clr-col-3">
+  <label for="cookedOn">Cooked on *</label>
+  </div>
+  <div class="clr-col-9">
+  <input type="date" id="cookedOn" name="cookedOn" [(clrDate)]="menu.cookedOn">
+  </div>
+  </div>
+
+  <!-- Textarea: description -->
+  <br/>
+  <textarea id="description" name="description" [(ngModel)]="menu.description" placeholder="You can describe your meal (optional)"
+  rows="5" maxlength="300"></textarea>
+  </section>
+  </form>
+  </clr-wizard-page>
+
+  <!-- 2nd page: cooking partners -->
+  <clr-wizard-page>
+    <ng-template clrPageTitle>Cooking Partners</ng-template>
+    <form class="form">
+      <section class="form-block">
+
+        <!-- Input: partner -->
+        <div class="form-group">
+          <label for="partner">Add cooking partner</label>
+          <input id="partner" type="text" name="partner" [(ngModel)]="partner">
+          <button type="button" class="btn btn-icon btn-sm btn-outline btn-primary" title="Add cooking partner"
+                  [disabled]="!partner" (click)="addPartner()">
+            <clr-icon shape="plus"></clr-icon>
+          </button>
+        </div>
+
+        <!-- Table: partners -->
+        <span class="p2">Your cooking partners:</span>
+        <br/>
+        <span *ngIf="menu.partners.length == 0">You haven't added any cooking partners yet</span>
+        <div *ngIf="menu.partners.length > 0" class="clr-row">
+          <table class="table table-noborder">
+            <thead>
+            <tr>
+              <th>Name</th>
+              <th>Status</th>
+              <!--
+              Unknown -> Action: Invite to the app opens dialog to enter email address
+                      email address already registered -> add person to contacts and show updated status in table (is now "Contact")
+                      email address not yer registered -> send email to possible new member  and show updated status in table (is now "Invitation sent")
+              Contact -> Action: Share menu
+                      Shared menus are visible in the other persons list of menus as well
+              Invitation sent -> Action: None
+              Probably should add a help text
+              -->
+              <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let partner of menu.partners">
+              <td><span class="padding-top">{{partner}}</span></td>
+              <td><span class="padding-top">Unknown</span></td>
+              <td>
+                <button type="button" class="btn btn-link btn-sm no-margin" (click)="openInvitationDialog()">Invite</button>
+                <button type="button" class="btn btn-link btn-sm no-margin" (click)="shareMenu()">Share</button>
+                <button type="button" class="btn btn-link btn-sm no-margin red" (click)="removePartner(partner)">Remove</button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </form>
+  </clr-wizard-page>
+
+  <!-- 3rd page: guests -->
+  <clr-wizard-page>
+    <ng-template clrPageTitle>Guests</ng-template>
+    <form class="form">
+      <section class="form-block">
+
+        <!-- Input: guest -->
+        <div class="form-group">
+          <label for="guest">Add guest</label>
+          <input id="guest" type="text" name="guest" [(ngModel)]="guest">
+          <button type="button" class="btn btn-icon btn-sm btn-outline btn-primary" title="Add guest"
+                  [disabled]="!guest" (click)="addGuest()">
+            <clr-icon shape="plus"></clr-icon>
+          </button>
+        </div>
+
+        <!-- Table: guests -->
+        <span class="p2">Your guests:</span>
+        <br/>
+        <span *ngIf="menu.guests.length == 0">You haven't added any guests yet</span>
+        <div *ngIf="menu.guests.length > 0" class="clr-row">
+          <table class="table table-noborder">
+            <thead>
+            <tr>
+              <th>Name</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let guest of menu.guests">
+              <td><span class="padding-top">{{guest}}</span></td>
+              <td><span class="padding-top">Unknown</span></td>
+              <td>
+                <button type="button" class="btn btn-link btn-sm no-margin" (click)="openInvitationDialog()">Invite</button>
+                <button type="button" class="btn btn-link btn-sm no-margin" (click)="shareMenu()">Share</button>
+                <button type="button" class="btn btn-link btn-sm no-margin red" (click)="removeGuest(guest)">Remove</button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </form>
+  </clr-wizard-page>
+
+  <!-- 4th page: images -->
+  <clr-wizard-page>
+    <ng-template clrPageTitle>Images</ng-template>
+    <p>The possibility to upload images will be implemented at a later date.</p>
+  </clr-wizard-page>
+
+
+  <clr-wizard-button [type]="'cancel'" (click)="closeNewMenuWizard()">Cancel</clr-wizard-button>
+  <clr-wizard-button [type]="'previous'">Back</clr-wizard-button>
+  <clr-wizard-button [type]="'next'">Next</clr-wizard-button>
+  <clr-wizard-button [type]="'finish'" (click)="saveMenu()">Finish</clr-wizard-button>
+</clr-wizard>

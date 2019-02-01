@@ -1,0 +1,48 @@
+<form clrForm #form="ngForm">
+  <div class="card">
+    <div class="card-header">
+      Ticket
+    </div>
+    <div class="card-block">
+
+      <!-- Alert: successfully created ticket -->
+      <div class="alert alert-success alert-sm" *ngIf="showSuccessAlert">
+        <button type="button" class="close" (click)="hideSuccessAlert()">
+          <clr-icon shape="close"></clr-icon>
+        </button>
+        <div class="alert-items">
+          <div class="alert-item static">
+            <div class="alert-icon-wrapper">
+              <clr-icon class="alert-icon" shape="check-circle"></clr-icon>
+            </div>
+            <span class="alert-text">TODO TYPE successfully sent</span>
+          </div>
+        </div>
+      </div>
+
+      <br/>
+      <div class="card-title">
+        Send a bug report or a feature request
+      </div>
+
+      <!-- Radio buttons: ticket type -->
+      <clr-radio-container>
+        <clr-radio-wrapper>
+          <input type="radio" clrRadio name="ticketTypes" required value="bugReport" [(ngModel)]="ticketType"/>
+          <label>Bug Report</label>
+        </clr-radio-wrapper>
+        <clr-radio-wrapper>
+          <input type="radio" clrRadio name="ticketTypes" required value="featureRequest" [(ngModel)]="ticketType"/>
+          <label>Feature Request</label>
+        </clr-radio-wrapper>
+        <clr-control-error>You must select a ticket type</clr-control-error>
+      </clr-radio-container>
+
+      <br/>
+      <div>
+        Work in Progress
+      </div>
+
+    </div>
+  </div>
+</form>

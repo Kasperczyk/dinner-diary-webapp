@@ -1,0 +1,19 @@
+#cookedOn {
+  margin-left: 155px; /* todo remove workaround when datepicker in form is fixed */
+}
+
+.no-margin {
+  margin: 0;
+}
+
+.padding-top {
+  padding-top: 5px;
+}
+
+.red {
+  color: red;
+}
+
+.red:hover {
+  color: darkred;
+}
